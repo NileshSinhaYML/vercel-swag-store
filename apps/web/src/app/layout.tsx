@@ -5,6 +5,7 @@ import { inter } from "@/app/font";
 import { Navigation } from "@ui/components/Navigation";
 
 import "./globals.css";
+import { Footer } from "@ui/components/Footer";
 
 export const metadata: Metadata = {
   title: "Swag Store",
@@ -17,6 +18,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
       <body className={inter.className}>
         <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

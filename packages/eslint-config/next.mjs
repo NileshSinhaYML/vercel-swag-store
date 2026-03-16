@@ -42,7 +42,7 @@ export const eslintNextConfig = defineConfig([
   ]),
   {
     files: ["**/*.json"],
-    ignores: ["package-lock.json"],
+    ignores: ["pnpm-lock.json"],
     plugins: { json },
     language: "json/json",
     extends: ["json/recommended"],
