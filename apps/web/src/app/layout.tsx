@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { FC, ReactNode } from "react";
 import { inter } from "@/app/font";
 
-import { Navigation } from "@/components/Navigation";
+import { Navigation } from "@ui/components/Navigation";
 
 import "./globals.css";
 

@@ -1,4 +1,4 @@
-import type { PrimaryNavMenuLink } from "@/types/components/PrimaryNav.types";
+import type { PrimaryNavMenuLink } from "../../../types/components/PrimaryNav.types";
 
 export const PRIMARY_NAV_CONSTANTS = {
   TITLE: "Swag Store",

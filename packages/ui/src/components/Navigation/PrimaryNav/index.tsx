@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { LogoVercel } from "geist-icons";
-import { PRIMARY_NAV_CONSTANTS } from "@/components/Navigation/PrimaryNav/PrimaryNav.constants";
-import { Button } from "@ui/components/ui/button";
+import { PRIMARY_NAV_CONSTANTS } from "./PrimaryNav.constants";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 
