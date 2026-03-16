@@ -1,11 +1,8 @@
-import { Button } from "@repo/ui/components/ui/button";
+import { Main } from "@/components/Main";
+import type { FC, ReactNode } from "react";
 
-export default function Page() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button variant="outline" size="sm">
-        Click me
-      </Button>
-    </main>
-  );
-}
+const Page: FC<{ children: ReactNode }> = ({ children }) => (
+  <Main>{children}</Main>
+);
+
+export default Page;
