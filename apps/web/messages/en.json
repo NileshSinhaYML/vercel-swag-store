@@ -1,0 +1,17 @@
+{
+  "NAVIGATION": {
+    "TITLE": "Swag Store",
+    "HOME": "Home",
+    "SEARCH": "Search",
+    "CART": "Cart"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "Swag Store. All rights reserved."
+  },
+  "SITE_METADATA": {
+    "TITLE": "Swag Store - Your One-Stop Shop for Cool Swag",
+    "META_TITLE": "Swag Store | %s",
+    "DEFAULT_META_TITLE": "Swag Store - Your One-Stop Shop for Cool Swag",
+    "DESCRIPTION": "Discover the coolest swag at our online store. From trendy apparel to unique accessories, we have everything you need to express your style. Shop now and elevate your swag game!"
+  }
+}
