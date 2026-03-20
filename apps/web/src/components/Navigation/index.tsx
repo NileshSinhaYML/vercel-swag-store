@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { PrimaryNav } from "./PrimaryNav";
-import { fetchPromoCode } from "./Navigation.actions";
-import { PromoBanner } from "./PromoBanner";
+import { PrimaryNav } from "@/components/Navigation/PrimaryNav";
+import { fetchPromoCode } from "@/components/Navigation/navigation.actions";
+import { PromoBanner } from "@/components/Navigation/PromoBanner";
 
 export const Navigation: FC = async () => {
   const promoCode = await fetchPromoCode();

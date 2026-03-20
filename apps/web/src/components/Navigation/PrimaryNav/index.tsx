@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { FC } from "react";
 import { LogoVercel } from "geist-icons";
-import { PRIMARY_NAV_CONSTANTS } from "./PrimaryNav.constants";
+import { PRIMARY_NAV_CONSTANTS } from "@/components/Navigation/PrimaryNav/PrimaryNav.constants";
 import { Button } from "@ui/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { ShoppingBag } from "lucide-react";
