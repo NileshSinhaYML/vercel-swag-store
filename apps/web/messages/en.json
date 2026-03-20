@@ -3,7 +3,8 @@
     "TITLE": "Swag Store",
     "HOME": "Home",
     "SEARCH": "Search",
-    "CART": "Cart"
+    "CART": "Cart",
+    "CODE": "Code:"
   },
   "FOOTER": {
     "COPYRIGHT": "Swag Store. All rights reserved."
@@ -13,5 +14,10 @@
     "META_TITLE": "Swag Store | %s",
     "DEFAULT_META_TITLE": "Swag Store - Your One-Stop Shop for Cool Swag",
     "DESCRIPTION": "Discover the coolest swag at our online store. From trendy apparel to unique accessories, we have everything you need to express your style. Shop now and elevate your swag game!"
+  },
+  "HOME_PAGE": {
+    "HERO_TITLE": "Wear the framework you ship with.",
+    "HERO_SUBTITLE": "Premium swag for developers who build with vercel. From tees to tech gear, represent the tools you love.",
+    "HERO_CTA": "Browse All Products"
   }
 }

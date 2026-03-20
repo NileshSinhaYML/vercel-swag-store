@@ -142,7 +142,7 @@ export const eslintNextConfig = defineConfig([
       "import-x/no-self-import": "error",
       "no-alert": "error",
       "no-caller": "error",
-      "no-console": "error",
+      "no-console": ["error", { allow: ["warn", "error"] }],
       "no-constructor-return": "error",
       "no-continue": "error",
       "no-else-return": "error",

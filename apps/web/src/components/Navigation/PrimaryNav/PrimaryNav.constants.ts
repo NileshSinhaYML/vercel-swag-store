@@ -1,4 +1,4 @@
-import type { PrimaryNavMenuLink } from "@/types/components/PrimaryNav.types";
+import type { PrimaryNavMenuLink } from "@/types/components/primary-nav.types";
 
 export const PRIMARY_NAV_CONSTANTS = {
   MENU_LINKS: [

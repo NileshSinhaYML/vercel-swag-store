@@ -1,8 +1,11 @@
 import { Main } from "@/components/Main";
-import type { FC, ReactNode } from "react";
+import { HomePageTemplate } from "@/templates/HomePage.template";
+import type { FC } from "react";
 
-const Page: FC<{ children: ReactNode }> = ({ children }) => (
-  <Main>{children}</Main>
+const Page: FC = () => (
+  <Main>
+    <HomePageTemplate />
+  </Main>
 );
 
 export default Page;
