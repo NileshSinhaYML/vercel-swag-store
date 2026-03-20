@@ -18,6 +18,8 @@
   "HOME_PAGE": {
     "HERO_TITLE": "Wear the framework you ship with.",
     "HERO_SUBTITLE": "Premium swag for developers who build with vercel. From tees to tech gear, represent the tools you love.",
-    "HERO_CTA": "Browse All Products"
+    "HERO_CTA": "Browse All Products",
+    "FEATURED_PRODUCTS_TITLE": "Featured Products",
+    "VIEW_ALL": "View All"
   }
 }

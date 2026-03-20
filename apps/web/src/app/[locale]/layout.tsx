@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { FC, ReactNode } from "react";
-import { inter } from "@/app/[locale]/font";
+import { geist } from "@/app/[locale]/font";
 
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 
@@ -12,6 +12,7 @@ import "@ui/styles/global.css";
 import { Footer } from "@/components/Footer";
 import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Spinner } from "@/components/Spinner";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("SITE_METADATA");
@@ -44,8 +45,8 @@ const LocaleLayout: FC<Readonly<LocaleLayoutProps>> = async ({
   setRequestLocale(locale);
   return (
     <html lang={locale}>
-      <body className={inter.className}>
-        <Suspense fallback={<div>Loading...</div>}>
+      <body className={geist.className}>
+        <Suspense fallback={<Spinner />}>
           <NextIntlClientProvider locale={locale}>
             <Navigation />
             {children}

@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
     tsconfigPath: "./tsconfig.json",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i8qy5y6gxkdgdcv9.public.blob.vercel-storage.com",
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();
