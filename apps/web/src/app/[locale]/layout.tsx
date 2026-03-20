@@ -6,11 +6,11 @@ import { inter } from "@/app/[locale]/font";
 
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 
-import { Navigation } from "@ui/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 
 import "@ui/styles/global.css";
-import { Footer } from "@ui/components/Footer";
-import { routing } from "@ui/i18n/routing";
+import { Footer } from "@/components/Footer";
+import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {

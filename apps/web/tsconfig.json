@@ -16,7 +16,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.ts",
-    "postcss.config.mjs"
+    "postcss.config.mjs",
+    "src/i18n/*.ts"
   ],
   "exclude": ["node_modules"],
   "references": [{ "path": "../../packages/ui" }]

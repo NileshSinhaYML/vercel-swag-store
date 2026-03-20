@@ -1,4 +1,4 @@
-import { routing } from "@ui/i18n/routing";
+import { routing } from "@/i18n/routing";
 import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 
