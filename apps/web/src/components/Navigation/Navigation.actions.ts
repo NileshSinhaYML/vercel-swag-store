@@ -1,9 +1,11 @@
 import { API_ROUTES } from "@/constants/api.routes";
 import { env } from "@/env";
 import type { PromoCodeResponse } from "@/types/api/promo-code-response";
+import { cacheLife } from "next/cache";
 
 export const fetchPromoCode = async () => {
-  "use cache";
+  "use cache: remote";
+  cacheLife("default");
   try {
     const response = await fetch(
       `${process.env.SWAG_STORE_API_ENDPOINT}${API_ROUTES.PROMOTIONS}`,
