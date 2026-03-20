@@ -1,3 +1,4 @@
+import { PAGE_ROUTES } from "@/constants/page.routes";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@ui/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -15,7 +16,7 @@ export const HomepageHero: FC = async () => {
       <h1 className="text-5xl font-bold">{t("HERO_TITLE")}</h1>
       <h2 className="text-sm text-gray-400">{t("HERO_SUBTITLE")}</h2>
       <Button asChild className="w-fit px-3 py-4 text-sm" variant="default">
-        <Link href="/products">
+        <Link href={PAGE_ROUTES.PRODUCTS}>
           <span>{t("HERO_CTA")}</span>
           <ArrowRight />
         </Link>

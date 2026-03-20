@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import type { FC } from "react";
 import { getFeaturedProducts } from "@/components/FeaturedProducts/featuredProducts.actions";
 import { ProductCardGrid } from "@/components/ProductCardGrid";
+import { PAGE_ROUTES } from "@/constants/page.routes";
 
 export const FeaturedProducts: FC = async () => {
   const locale = await getLocale();
@@ -20,7 +21,7 @@ export const FeaturedProducts: FC = async () => {
           variant="link"
           className="text-xs text-gray-500 hover:text-gray-700 hover:no-underline"
         >
-          <Link href="/products">{t("VIEW_ALL")}</Link>
+          <Link href={PAGE_ROUTES.PRODUCTS}>{t("VIEW_ALL")}</Link>
         </Button>
       </div>
       <ProductCardGrid products={featuredProducts?.data} />
