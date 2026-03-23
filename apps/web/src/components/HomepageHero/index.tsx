@@ -1,3 +1,4 @@
+import { APP_CONSTANTS } from "@/constants/app.constants";
 import { PAGE_ROUTES } from "@/constants/page.routes";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@ui/components/ui/button";
@@ -9,7 +10,7 @@ export const HomepageHero: FC = async () => {
   const locale = await getLocale();
   const t = await getTranslations({
     locale,
-    namespace: "HOME_PAGE",
+    namespace: APP_CONSTANTS.NAME_SPACES.HOME_PAGE,
   });
   return (
     <div className="flex w-full flex-col gap-y-4 lg:w-1/3 lg:gap-y-6">

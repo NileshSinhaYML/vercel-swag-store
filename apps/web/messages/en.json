@@ -21,5 +21,9 @@
     "HERO_CTA": "Browse All Products",
     "FEATURED_PRODUCTS_TITLE": "Featured Products",
     "VIEW_ALL": "View All"
+  },
+  "PDP": {
+    "OUT_OF_STOCK": "Sorry, this product is currently out of stock.",
+    "LOW_STOCK": "Hurry! Only {stock} left in stock."
   }
 }

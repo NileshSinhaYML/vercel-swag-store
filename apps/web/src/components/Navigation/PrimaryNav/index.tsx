@@ -6,12 +6,13 @@ import { Button } from "@ui/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { ShoppingBag } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { APP_CONSTANTS } from "@/constants/app.constants";
 
 export const PrimaryNav: FC = async () => {
   const locale = await getLocale();
   const t = await getTranslations({
     locale,
-    namespace: "NAVIGATION",
+    namespace: APP_CONSTANTS.NAME_SPACES.NAVIGATION,
   });
   return (
     <div className="flex items-center gap-x-4 px-6 py-4 lg:gap-x-8 lg:px-10">

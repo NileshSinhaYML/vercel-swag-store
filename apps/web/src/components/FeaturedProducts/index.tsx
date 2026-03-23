@@ -2,14 +2,18 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@ui/components/ui/button";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { FC } from "react";
-import { getFeaturedProducts } from "@/components/FeaturedProducts/featuredProducts.actions";
+import { fetchFeaturedProducts } from "@/app/[locale]/actions";
 import { ProductCardGrid } from "@/components/ProductCardGrid";
 import { PAGE_ROUTES } from "@/constants/page.routes";
+import { APP_CONSTANTS } from "@/constants/app.constants";
 
 export const FeaturedProducts: FC = async () => {
   const locale = await getLocale();
-  const t = await getTranslations({ locale, namespace: "HOME_PAGE" });
-  const featuredProducts = await getFeaturedProducts();
+  const t = await getTranslations({
+    locale,
+    namespace: APP_CONSTANTS.NAME_SPACES.HOME_PAGE,
+  });
+  const featuredProducts = await fetchFeaturedProducts();
   return (
     <div>
       <div className="flex w-full items-center justify-between">

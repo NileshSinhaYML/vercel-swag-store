@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/constants/api.routes";
 import { env } from "@/env";
-import type { PromoCodeResponse } from "@/types/api/promo-code-response";
+import type { PromoCodeResponse } from "@/types/api/promo-code";
 import { cacheLife } from "next/cache";
 
 export const fetchPromoCode = async () => {

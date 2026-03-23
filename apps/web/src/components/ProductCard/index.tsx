@@ -8,6 +8,8 @@ import {
 } from "@ui/components/ui/card";
 import Image from "next/image";
 import { useFormatter } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { Button } from "@ui/components/ui/button";
 
 export const ProductCard: FC<Product & { shouldLoadEager?: boolean }> = ({
   name,
@@ -15,11 +17,19 @@ export const ProductCard: FC<Product & { shouldLoadEager?: boolean }> = ({
   description,
   price,
   currency,
+  slug,
   shouldLoadEager = false,
 }) => {
   const formatter = useFormatter();
   return (
-    <Card className="h-full">
+    <Card className="group relative h-full">
+      <Button
+        asChild
+        variant="link"
+        className="absolute inset-0 z-1 size-full cursor-pointer"
+      >
+        <Link href={`/product/${slug}`} />
+      </Button>
       <div className="relative mx-auto flex w-full items-center justify-center">
         {images.length > 0 && (
           <Image
@@ -33,7 +43,9 @@ export const ProductCard: FC<Product & { shouldLoadEager?: boolean }> = ({
         )}
       </div>
       <CardHeader>
-        <CardTitle>{name}</CardTitle>
+        <CardTitle className="group-focus-within:underline group-hover:underline">
+          {name}
+        </CardTitle>
         <CardDescription className="flex flex-col gap-y-2">
           <p>{description}</p>
           <span className="font-semibold">

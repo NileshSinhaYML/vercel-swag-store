@@ -1,8 +1,8 @@
-import { getAllCategories } from "@/app/[locale]/products/actions";
+import { fetchAllCategories } from "@/app/[locale]/products/actions";
 import type { FC } from "react";
 
 export const ProductsPageTemplate: FC = async () => {
-  const categoriesResponse = await getAllCategories();
+  const categoriesResponse = await fetchAllCategories();
 
   return (
     <div className="col-span-full flex flex-col gap-y-4 lg:gap-y-8">
