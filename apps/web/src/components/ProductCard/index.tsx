@@ -1,3 +1,5 @@
+"use client";
+
 import type { Product } from "@/types/api/products";
 import type { FC } from "react";
 import {
@@ -10,8 +12,13 @@ import Image from "next/image";
 import { useFormatter } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@ui/components/ui/button";
+import { cn } from "@repo/ui/lib/utils";
 
-export const ProductCard: FC<Product & { shouldLoadEager?: boolean }> = ({
+export interface ProductCardProps extends Product {
+  shouldLoadEager?: boolean;
+  className?: string;
+}
+export const ProductCard: FC<ProductCardProps> = ({
   name,
   images,
   description,
@@ -19,10 +26,11 @@ export const ProductCard: FC<Product & { shouldLoadEager?: boolean }> = ({
   currency,
   slug,
   shouldLoadEager = false,
+  className,
 }) => {
   const formatter = useFormatter();
   return (
-    <Card className="group relative h-full">
+    <Card className={cn("group relative h-full", className)}>
       <Button
         asChild
         variant="link"

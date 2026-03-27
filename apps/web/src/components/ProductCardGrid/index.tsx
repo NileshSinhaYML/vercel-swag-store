@@ -1,13 +1,18 @@
 import type { FC } from "react";
 import type { Product } from "@/types/api/products";
 import { ProductCard } from "@/components/ProductCard";
+import { cn } from "@repo/ui/lib/utils";
 
 export interface ProductCardGridProps {
   products?: Product[];
+  className?: string;
 }
 
-export const ProductCardGrid: FC<ProductCardGridProps> = ({ products }) => (
-  <div className="grid grid-cols-12 gap-4 lg:gap-10">
+export const ProductCardGrid: FC<ProductCardGridProps> = ({
+  products,
+  className,
+}) => (
+  <div className={cn("grid grid-cols-12 gap-4 lg:gap-10", className)}>
     {products &&
       products?.length > 0 &&
       products.map((product, index) => (

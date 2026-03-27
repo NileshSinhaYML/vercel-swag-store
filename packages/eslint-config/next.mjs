@@ -204,6 +204,7 @@ export const eslintNextConfig = defineConfig([
       "unicorn/no-useless-switch-case": "off",
       "unicorn/numeric-separators-style": "off",
       "unicorn/switch-case-braces": "off",
+      "tailwindcss/no-custom-classname": "off",
       yoda: ["error", "never", { onlyEquality: true }],
     },
   },

@@ -6,8 +6,15 @@ import { fetchFeaturedProducts } from "@/app/[locale]/actions";
 import { ProductCardGrid } from "@/components/ProductCardGrid";
 import { PAGE_ROUTES } from "@/constants/page.routes";
 import { APP_CONSTANTS } from "@/constants/app.constants";
+import { cn } from "@repo/ui/lib/utils";
 
-export const FeaturedProducts: FC = async () => {
+export interface FeaturedProductsProps {
+  className?: string;
+}
+
+export const FeaturedProducts: FC<FeaturedProductsProps> = async ({
+  className,
+}) => {
   const locale = await getLocale();
   const t = await getTranslations({
     locale,
@@ -15,7 +22,7 @@ export const FeaturedProducts: FC = async () => {
   });
   const featuredProducts = await fetchFeaturedProducts();
   return (
-    <div>
+    <div className={cn("flex flex-col gap-y-4", className)}>
       <div className="flex w-full items-center justify-between">
         <h3 className="mb-6 text-lg font-semibold">
           {t("FEATURED_PRODUCTS_TITLE")}
@@ -25,7 +32,7 @@ export const FeaturedProducts: FC = async () => {
           variant="link"
           className="text-xs text-gray-500 hover:text-gray-700 hover:no-underline"
         >
-          <Link href={PAGE_ROUTES.PRODUCTS}>{t("VIEW_ALL")}</Link>
+          <Link href={PAGE_ROUTES.SEARCH}>{t("VIEW_ALL")}</Link>
         </Button>
       </div>
       <ProductCardGrid products={featuredProducts?.data} />
