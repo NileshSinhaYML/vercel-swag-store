@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { FC } from "react";
 import { LogoVercel } from "geist-icons";
 import { PRIMARY_NAV_CONSTANTS } from "@/components/Navigation/PrimaryNav/PrimaryNav.constants";
@@ -24,20 +23,18 @@ export const PrimaryNav: FC = async () => {
           </Link>
         </Button>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="flex items-center gap-x-2 lg:gap-x-4">
-          {PRIMARY_NAV_CONSTANTS.MENU_LINKS.map((link) => (
-            <Button
-              key={link.name}
-              asChild
-              variant="link"
-              className="text-xs text-gray-400 hover:text-gray-700 hover:no-underline"
-            >
-              <Link href={link.href}>{t(link.name.toUpperCase())}</Link>
-            </Button>
-          ))}
-        </div>
-      </Suspense>
+      <div className="flex items-center gap-x-2 lg:gap-x-4">
+        {PRIMARY_NAV_CONSTANTS.MENU_LINKS.map((link) => (
+          <Button
+            key={link.name}
+            asChild
+            variant="link"
+            className="text-muted-foreground hover:text-foreground text-xs hover:no-underline"
+          >
+            <Link href={link.href}>{t(link.name.toUpperCase())}</Link>
+          </Button>
+        ))}
+      </div>
       <div className="ml-auto">
         <ShoppingBag aria-label={t("CART")} />
       </div>

@@ -9,8 +9,10 @@ import {
   PaginationPrevious,
 } from "@ui/components/ui/pagination";
 import type { CommitSearchToUrl } from "@/contexts/SearchPageContext";
+import { APP_CONSTANTS } from "@/constants/app.constants";
 import { useSearchResultsStore } from "@/stores/search-results.store";
 import { getPaginationPageItems } from "@/utils/pagination.utils";
+import { useTranslations } from "next-intl";
 import type { FC } from "react";
 
 type ProductsPaginationProps = {
@@ -20,6 +22,7 @@ type ProductsPaginationProps = {
 export const ProductsPagination: FC<Readonly<ProductsPaginationProps>> = ({
   commitToUrl,
 }) => {
+  const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
   const pagination = useSearchResultsStore(
     (s) => s.searchResults?.meta?.pagination,
   );
@@ -32,13 +35,19 @@ export const ProductsPagination: FC<Readonly<ProductsPaginationProps>> = ({
   return (
     <div className="border-border flex flex-col gap-4 border-t pt-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
       <p className="text-muted-foreground text-sm">
-        Page {page} of {totalPages} · {pagination.total} products
+        {t("PAGINATION_SUMMARY", {
+          page,
+          totalPages,
+          total: pagination.total,
+        })}
       </p>
       <Pagination className="mx-0 w-auto justify-end">
         <PaginationContent className="flex-wrap justify-end gap-0.5 sm:gap-0">
           <PaginationItem>
             <PaginationPrevious
               href="#"
+              text={t("PAGINATION_PREVIOUS")}
+              aria-label={t("PAGINATION_GO_PREVIOUS")}
               aria-disabled={pagination.hasPreviousPage ? undefined : true}
               tabIndex={pagination.hasPreviousPage ? undefined : -1}
               onClick={(e) => {
@@ -79,6 +88,8 @@ export const ProductsPagination: FC<Readonly<ProductsPaginationProps>> = ({
           <PaginationItem>
             <PaginationNext
               href="#"
+              text={t("PAGINATION_NEXT")}
+              aria-label={t("PAGINATION_GO_NEXT")}
               aria-disabled={pagination.hasNextPage ? undefined : true}
               tabIndex={pagination.hasNextPage ? undefined : -1}
               onClick={(e) => {

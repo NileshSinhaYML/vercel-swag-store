@@ -25,5 +25,25 @@
   "PDP": {
     "OUT_OF_STOCK": "Sorry, this product is currently out of stock.",
     "LOW_STOCK": "Hurry! Only {stock} left in stock."
+  },
+  "SEARCH_PAGE": {
+    "SEARCH_LABEL": "Search",
+    "SEARCH_PLACEHOLDER": "Search products…",
+    "SEARCH_BUTTON": "Search",
+    "LOADING_PRODUCTS": "Loading products…",
+    "SUSPENSE_LOADING": "Loading search…",
+    "SEARCHING_STATUS": "Searching…",
+    "ERROR_LOAD_PRODUCTS": "Could not load products.",
+    "ERROR_UNEXPECTED": "Unexpected response from server.",
+    "EMPTY_RESULTS_SEARCH": "No products found for this search. Try different keywords or change the category filter.",
+    "EMPTY_RESULTS_BROWSE": "No products are available to show right now.",
+    "PAGINATION_SUMMARY": "Page {page} of {totalPages} · {total} products",
+    "PAGINATION_PREVIOUS": "Previous",
+    "PAGINATION_NEXT": "Next",
+    "PAGINATION_GO_PREVIOUS": "Go to previous page",
+    "PAGINATION_GO_NEXT": "Go to next page",
+    "CATEGORY_LABEL": "Category",
+    "CATEGORY_PLACEHOLDER": "All categories",
+    "ALL_CATEGORIES": "All categories"
   }
 }

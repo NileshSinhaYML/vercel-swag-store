@@ -1,9 +1,5 @@
 export type PaginationPageItem = number | "ellipsis";
 
-/**
- * Builds a compact list of page numbers and ellipsis markers for UI pagination
- * (e.g. 1 … 4 5 6 … 20). Based on a sliding window around the current page.
- */
 export const getPaginationPageItems: ({
   currentPage,
   totalPages,

@@ -15,8 +15,11 @@ import type { ProductsResponse } from "@/types/api/products";
 import { API_ROUTES } from "@/constants/api.routes";
 import { ProductsPagination } from "@/components/ProductResults/ProductsPagination";
 import { useSearchPageContext } from "@/contexts/SearchPageContext";
+import { APP_CONSTANTS } from "@/constants/app.constants";
+import { useTranslations } from "next-intl";
 
 export const ProductResults = () => {
+  const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
   const commitToUrl = useSearchPageContext();
   const { queryParams, setSearchResults } = useSearchResultsStore(
     useShallow((s) => ({
@@ -44,24 +47,24 @@ export const ProductResults = () => {
         const message =
           "error" in body && typeof body.error === "string"
             ? body.error
-            : "Could not load products.";
+            : t("ERROR_LOAD_PRODUCTS");
         setFetchError(message);
         setSearchResults(null);
         return;
       }
       if (!isProductsResponse(body)) {
-        setFetchError("Unexpected response from server.");
+        setFetchError(t("ERROR_UNEXPECTED"));
         setSearchResults(null);
         return;
       }
       setSearchResults(body);
     } catch {
-      setFetchError("Could not load products.");
+      setFetchError(t("ERROR_LOAD_PRODUCTS"));
       setSearchResults(null);
     } finally {
       setIsLoading(false);
     }
-  }, [queryParams, setSearchResults]);
+  }, [queryParams, setSearchResults, t]);
 
   useEffect(() => {
     void fetchProducts();
@@ -72,12 +75,18 @@ export const ProductResults = () => {
 
   const showPagination = !isSearchActive && pagination && products.length > 0;
 
+  const searchEmptyText = isSearchActive
+    ? t("EMPTY_RESULTS_SEARCH")
+    : t("EMPTY_RESULTS_BROWSE");
+
   return (
     <div className="flex flex-col gap-8">
       <div aria-live="polite">
         {isLoading && (
           <div className="space-y-3">
-            <p className="text-muted-foreground text-sm">Searching…</p>
+            <p className="text-muted-foreground text-sm">
+              {t("SEARCHING_STATUS")}
+            </p>
             <ProductResultsSkeleton isSearchActive={isSearchActive} />
           </div>
         )}
@@ -88,11 +97,7 @@ export const ProductResults = () => {
         </p>
       )}
       {!isLoading && !fetchError && products.length === 0 && (
-        <p className="text-muted-foreground text-sm">
-          {isSearchActive
-            ? "No products found for this search. Try different keywords or change the category filter."
-            : "No products are available to show right now."}
-        </p>
+        <p className="text-muted-foreground text-sm">{searchEmptyText}</p>
       )}
       {!isLoading && !fetchError && products.length > 0 && (
         <div

@@ -24,7 +24,7 @@ export const HomepageHero: FC<HomepageHeroProps> = async ({ className }) => {
       )}
     >
       <h1 className="text-5xl font-bold">{t("HERO_TITLE")}</h1>
-      <h2 className="text-sm text-gray-400">{t("HERO_SUBTITLE")}</h2>
+      <h2 className="text-muted-foreground text-sm">{t("HERO_SUBTITLE")}</h2>
       <Button asChild className="w-fit px-3 py-4 text-sm" variant="default">
         <Link href={PAGE_ROUTES.SEARCH}>
           <span>{t("HERO_CTA")}</span>

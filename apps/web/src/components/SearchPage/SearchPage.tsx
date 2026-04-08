@@ -24,20 +24,24 @@ import {
   useRef,
   useState,
 } from "react";
+import type { FC } from "react";
 import { SEARCH_PAGE_CONSTANTS } from "@/components/SearchPage/SearchPage.constants";
 import { SearchPageProvider } from "@/providers/SearchPageProvider";
 import type { CommitSearchToUrl } from "@/contexts/SearchPageContext";
+import { APP_CONSTANTS } from "@/constants/app.constants";
+import { useTranslations } from "next-intl";
 import { useShallow } from "zustand/shallow";
 
-export interface SearchPageClientProps {
+export interface SearchPageProps {
   readonly categories: Category[];
   readonly initialQueryParams: SearchQueryParams;
 }
 
-export function SearchPageClient({
+export const SearchPage: FC<Readonly<SearchPageProps>> = ({
   categories,
   initialQueryParams,
-}: Readonly<SearchPageClientProps>) {
+}) => {
+  const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -117,15 +121,13 @@ export function SearchPageClient({
       <div className="col-span-full flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="search-query">
-              {SEARCH_PAGE_CONSTANTS.SEARCH_INPUT_LABEL}
-            </Label>
+            <Label htmlFor="search-query">{t("SEARCH_LABEL")}</Label>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
               <Input
                 id="search-query"
                 name="q"
                 type="search"
-                placeholder="Search products…"
+                placeholder={t("SEARCH_PLACEHOLDER")}
                 value={searchDraft}
                 onChange={(e) => setSearchDraft(e.target.value)}
                 onKeyDown={(e) => {
@@ -143,7 +145,7 @@ export function SearchPageClient({
                 onClick={submitSearch}
               >
                 <SearchIcon className="size-4 shrink-0" aria-hidden />
-                Search
+                {t("SEARCH_BUTTON")}
               </Button>
             </div>
           </div>
@@ -162,11 +164,11 @@ export function SearchPageClient({
         ) : (
           <div className="border-border flex min-h-[12rem] items-center justify-center rounded-lg border border-dashed">
             <p className="text-muted-foreground text-sm">
-              {SEARCH_PAGE_CONSTANTS.LOADING_PRODUCTS_MESSAGE}
+              {t("LOADING_PRODUCTS")}
             </p>
           </div>
         )}
       </div>
     </SearchPageProvider>
   );
-}
+};
