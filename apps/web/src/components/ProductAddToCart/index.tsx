@@ -85,7 +85,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-4">
             <div
               className={cn(
-                "border-input bg-background inline-flex h-11 w-max max-w-full shrink-0 items-stretch self-start overflow-hidden rounded-xl border shadow-sm sm:self-auto",
+                "border-input bg-background flex h-11 w-full min-w-0 shrink-0 items-stretch overflow-hidden rounded-xl border shadow-sm sm:inline-flex sm:w-auto sm:max-w-full",
                 "ring-offset-background focus-within:ring-ring focus-within:ring-2 focus-within:ring-offset-2",
               )}
             >
@@ -101,7 +101,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
                 <Minus className="size-4" aria-hidden />
               </Button>
               <span
-                className="flex min-w-12 items-center justify-center px-1 text-base font-semibold tabular-nums sm:min-w-[2.75rem] sm:px-0"
+                className="flex min-w-0 flex-1 items-center justify-center px-2 text-base font-semibold tabular-nums sm:min-w-[2.75rem] sm:flex-none sm:px-0"
                 aria-live="polite"
               >
                 {resolvedToAdd}
