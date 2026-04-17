@@ -14,7 +14,7 @@ Monorepo for the Swag Store web app: a Next.js storefront that talks to a Swag S
 
 ## Requirements
 
-- **Node.js** ≥ 18 (see root `package.json` `engines`)
+- **Node.js** 22.x (see root and `apps/web` `package.json` `engines`; Vercel uses this instead of the platform default)
 - **pnpm** 10.x (see `packageManager` in root `package.json`)
 
 ## Setup
