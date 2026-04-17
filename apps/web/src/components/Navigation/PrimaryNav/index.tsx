@@ -1,11 +1,12 @@
 import type { FC } from "react";
 import { LogoVercel } from "geist-icons";
+import { CartNavLink } from "@/components/CartNavLink";
 import { PRIMARY_NAV_CONSTANTS } from "@/components/Navigation/PrimaryNav/PrimaryNav.constants";
 import { Button } from "@ui/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { ShoppingBag } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { APP_CONSTANTS } from "@/constants/app.constants";
+import { PAGE_ROUTES } from "@/constants/page.routes";
 
 export const PrimaryNav: FC = async () => {
   const locale = await getLocale();
@@ -17,7 +18,7 @@ export const PrimaryNav: FC = async () => {
     <div className="flex items-center gap-x-4 px-6 py-4 lg:gap-x-8 lg:px-10">
       <div className="flex h-full items-start gap-x-2">
         <Button asChild variant="link" className="pl-0 hover:no-underline">
-          <Link href="/">
+          <Link href={PAGE_ROUTES.HOME}>
             <LogoVercel aria-hidden="true" />
             <span className="text-sm font-medium">{t("TITLE")}</span>
           </Link>
@@ -36,7 +37,7 @@ export const PrimaryNav: FC = async () => {
         ))}
       </div>
       <div className="ml-auto">
-        <ShoppingBag aria-label={t("CART")} />
+        <CartNavLink />
       </div>
     </div>
   );

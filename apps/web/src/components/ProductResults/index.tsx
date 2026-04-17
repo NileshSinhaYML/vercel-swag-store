@@ -39,7 +39,7 @@ export const ProductResults = () => {
     setFetchError(null);
     setSearchResults(null);
     const searchParams = buildSearchApiQueryString(queryParams);
-    const url = `${API_ROUTES.PRODUCTS_PROXY}?${searchParams}`;
+    const url = `${API_ROUTES.SEARCH}?${searchParams}`;
     try {
       const response = await fetch(url);
       const body = (await response.json()) as Awaited<ProductsResponse>;

@@ -30,7 +30,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = async ({
         <Button
           asChild
           variant="link"
-          className="text-xs text-gray-500 hover:text-gray-700 hover:no-underline"
+          className="text-muted-foreground hover:text-foreground text-xs hover:no-underline"
         >
           <Link href={PAGE_ROUTES.SEARCH}>{t("VIEW_ALL")}</Link>
         </Button>

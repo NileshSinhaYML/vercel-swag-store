@@ -1,58 +1,64 @@
-# Turborepo Tailwind CSS starter
+# Vercel Swag Store
 
-This Turborepo starter is maintained by the Turborepo core team.
+Monorepo for the Swag Store web app: a Next.js storefront that talks to a Swag Store HTTP API (products, categories, cart), with shared UI and tooling packages.
 
-## Using this example
+## Structure
 
-Run the following command:
+| Path | Description |
+|------|-------------|
+| `apps/web` | Next.js 16 app (App Router, React 19, next-intl, Tailwind v4). Port **3001** in dev. |
+| `packages/ui` | Shared UI (shadcn-style components, Tailwind). Builds `dist/` CSS and TypeScript declarations consumed by the app. |
+| `packages/eslint-config` | Shared ESLint flat configs. |
+| `packages/typescript-config` | Shared `tsconfig` bases. |
+| `packages/tailwind-config` | Shared Tailwind/PostCSS pieces. |
 
-```sh
-npx create-turbo@latest -e with-tailwind
+## Requirements
+
+- **Node.js** ≥ 18 (see root `package.json` `engines`)
+- **pnpm** 10.x (see `packageManager` in root `package.json`)
+
+## Setup
+
+Install dependencies from the repository root:
+
+```bash
+pnpm install
 ```
 
-## What's inside?
+### Environment (web app)
 
-This Turborepo includes the following packages/apps:
+Copy `apps/web/.env.example` to `apps/web/.env` and set:
 
-### Apps and Packages
+- `SWAG_STORE_API_ENDPOINT` — base URL of the Swag Store API (no trailing slash)
+- `SWAG_STORE_API_TOKEN` — value sent as `x-vercel-protection-bypass` for upstream requests
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Server code uses `@/server/swag-store-api.fetch` (`swagStoreApiUrl`, `swagStoreApiAuthHeaders`) for those calls.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Scripts (root)
 
-### Building packages/ui
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Run all `dev` tasks (web dev server, etc.) via Turborepo. |
+| `pnpm build` | Build dependencies (`^build`) then apps (`@repo/ui` then `web`). |
+| `pnpm lint` | ESLint in workspaces that define a `lint` script. |
+| `pnpm check-types` | Typecheck in workspaces that define `check-types`. |
+| `pnpm format` | Prettier on `*.{ts,tsx,md}`. |
 
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
+## Turborepo
 
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
+Root [`turbo.json`](turbo.json) defines pipeline tasks and cache boundaries:
 
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+- **build** — default `dependsOn: ["^build"]` so libraries build before dependents. Caches `.next/**` (excluding `.next/cache`) and `dist/**`, and declares Swag Store env vars so cache keys stay correct when upstream credentials change.
+- **lint** / **check-types** — `dependsOn: ["^…"]` where those scripts exist in dependencies.
+- **dev** — not cached, persistent; same env keys for local parity.
 
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
+Workspace overrides (narrow the build graph for this repo):
 
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
+- [`packages/ui/turbo.json`](packages/ui/turbo.json) — `build` has no `^build` deps (config-only workspace packages have no `build` script).
+- [`apps/web/turbo.json`](apps/web/turbo.json) — `build` depends only on `@repo/ui#build` (not every devDependency).
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+`@repo/ui` exposes a composite **`build`** script (`build:styles` + `build:components`) so UI assets exist before `next build`.
 
-### Utilities
+## License
 
-This Turborepo has some additional tools already setup for you:
-
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Private / internal unless otherwise noted per package.

@@ -7,7 +7,6 @@ export const getPaginationPageItems: ({
 }: {
   currentPage: number;
   totalPages: number;
-  /** Pages shown on each side of the current page (default 1). */
   siblingCount?: number;
 }) => PaginationPageItem[] = ({
   currentPage,

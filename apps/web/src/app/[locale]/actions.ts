@@ -1,5 +1,8 @@
 import { API_ROUTES } from "@/constants/api.routes";
-import { env } from "@/env";
+import {
+  swagStoreApiAuthHeaders,
+  swagStoreApiUrl,
+} from "@/server/swag-store-api.fetch";
 import type { ProductsResponse } from "@/types/api/products";
 import { cacheLife } from "next/cache";
 
@@ -8,12 +11,8 @@ export const fetchFeaturedProducts = async () => {
   cacheLife("default");
   try {
     const response = await fetch(
-      `${env.SWAG_STORE_API_ENDPOINT}${API_ROUTES.PRODUCTS}?featured=true`,
-      {
-        headers: {
-          "x-vercel-protection-bypass": env.SWAG_STORE_API_TOKEN,
-        },
-      },
+      swagStoreApiUrl(`${API_ROUTES.PRODUCTS}?featured=true`),
+      { headers: { ...swagStoreApiAuthHeaders } },
     );
     const data = (await response.json()) as Awaited<ProductsResponse>;
     return data;

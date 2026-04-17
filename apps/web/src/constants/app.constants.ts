@@ -6,5 +6,7 @@ export const APP_CONSTANTS = {
     HOME_PAGE: "HOME_PAGE",
     PDP: "PDP",
     SEARCH_PAGE: "SEARCH_PAGE",
+    CART: "CART",
   },
+  CART_SUMMARY_ESTIMATED_TAX_RATE: 0,
 } as const satisfies Record<string, unknown>;

@@ -1,28 +1,45 @@
-## Getting Started
+# Web (`apps/web`)
 
-First, run the development server:
+Next.js storefront for the Swag Store: localized routes, product search and PDP, cart (client store + API routes proxying the upstream cart API), and shared components from `@repo/ui`.
 
-```bash
-yarn dev
-```
+## Prerequisites
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+- Root monorepo installed with `pnpm install` (from repository root).
+- Environment variables configured (see below).
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-To create [API routes](https://nextjs.org/docs/app/building-your-application/routing/router-handlers) add an `api/` directory to the `app/` directory with a `route.ts` file. For individual endpoints, create a subfolder in the `api` directory, like `api/hello/route.ts` would map to [http://localhost:3001/api/hello](http://localhost:3001/api/hello).
+Create `apps/web/.env` (see `.env.example`):
 
-## Learn More
+| Variable | Purpose |
+|----------|---------|
+| `SWAG_STORE_API_ENDPOINT` | Base URL for the Swag Store API |
+| `SWAG_STORE_API_TOKEN` | Bypass / auth header for protected upstream |
 
-To learn more about Next.js, take a look at the following resources:
+Validated with `@t3-oss/env-nextjs` in `src/env.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn/foundations/about-nextjs) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Run from **`apps/web`** or via **`pnpm --filter web <script>`** from the repo root:
 
-## Deploy on Vercel
+| Script | Description |
+|--------|-------------|
+| `pnpm dev` | Next dev server on **http://localhost:3001** |
+| `pnpm build` | Production build |
+| `pnpm start` | Start production server (after `build`) |
+| `pnpm lint` | ESLint (`--max-warnings 0`) |
+| `pnpm check-types` | `next typegen` + `tsc --noEmit` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
+From the monorepo root, `pnpm dev` / `pnpm build` run through Turborepo (see root `README.md`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## App layout
+
+- `src/app` — App Router pages, API route handlers, layouts.
+- `src/components` — Feature and layout components.
+- `src/hooks`, `src/stores`, `src/utils` — Client hooks, Zustand stores, helpers.
+- `src/server` — Server-only helpers (e.g. upstream API URL/headers).
+
+## Learn more
+
+- [Next.js documentation](https://nextjs.org/docs)
+- [Turborepo documentation](https://turbo.build/repo/docs)

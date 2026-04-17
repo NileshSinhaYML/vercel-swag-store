@@ -4,6 +4,7 @@
     "HOME": "Home",
     "SEARCH": "Search",
     "CART": "Cart",
+    "CART_ARIA": "Shopping cart, {count, plural, =0 {no items} one {# item} other {# items}}",
     "CODE": "Code:"
   },
   "FOOTER": {
@@ -23,8 +24,34 @@
     "VIEW_ALL": "View All"
   },
   "PDP": {
+    "PRICE_LABEL": "Price",
+    "PURCHASE_SECTION_LABEL": "Purchase options",
     "OUT_OF_STOCK": "Sorry, this product is currently out of stock.",
-    "LOW_STOCK": "Hurry! Only {stock} left in stock."
+    "LOW_STOCK": "Hurry! Only {stock} left in stock.",
+    "CART_AVAILABLE": "{count} available to add",
+    "CART_ADD_QUANTITY_LABEL": "Quantity to add",
+    "CART_IN_CART_LABEL": "In your cart",
+    "ADD_TO_CART": "Add to cart",
+    "CART_DECREASE": "Remove one from cart",
+    "CART_INCREASE": "Add one to cart",
+    "CART_DECREASE_ADD": "Decrease quantity to add",
+    "CART_INCREASE_ADD": "Increase quantity to add",
+    "VIEW_CART": "View cart"
+  },
+  "CART": {
+    "META_TITLE": "Cart",
+    "TITLE": "Your cart",
+    "LOADING": "Loading cart…",
+    "EMPTY": "Your cart is empty.",
+    "NO_IMAGE": "No image",
+    "SUBTOTAL": "Subtotal",
+    "ESTIMATED_TAX": "Estimated tax",
+    "TOTAL": "Order total",
+    "TAX_NOTE": "Tax is an estimate until checkout.",
+    "ORDER_SUMMARY": "Order summary",
+    "REMOVE": "Remove",
+    "DECREASE_QTY": "Decrease quantity",
+    "INCREASE_QTY": "Increase quantity"
   },
   "SEARCH_PAGE": {
     "SEARCH_LABEL": "Search",

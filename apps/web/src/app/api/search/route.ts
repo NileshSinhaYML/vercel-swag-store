@@ -1,5 +1,8 @@
 import { API_ROUTES } from "@/constants/api.routes";
-import { env } from "@/env";
+import {
+  swagStoreApiAuthHeaders,
+  swagStoreApiUrl,
+} from "@/server/swag-store-api.fetch";
 import type { ProductsResponse } from "@/types/api/products";
 import { isNextPrerenderBailout } from "@/utils/api.utils";
 import { NextResponse } from "next/server";
@@ -14,12 +17,8 @@ export const GET = async (request: NextRequest) => {
     }
 
     const productsResponse = await fetch(
-      `${env.SWAG_STORE_API_ENDPOINT}${API_ROUTES.PRODUCTS}?${upstream.toString()}`,
-      {
-        headers: {
-          "x-vercel-protection-bypass": env.SWAG_STORE_API_TOKEN,
-        },
-      },
+      swagStoreApiUrl(`${API_ROUTES.PRODUCTS}?${upstream.toString()}`),
+      { headers: { ...swagStoreApiAuthHeaders } },
     );
 
     const products =
