@@ -85,7 +85,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-4">
             <div
               className={cn(
-                "border-input bg-background flex h-11 shrink-0 items-stretch overflow-hidden rounded-xl border shadow-sm",
+                "border-input bg-background inline-flex h-11 w-max max-w-full shrink-0 items-stretch self-start overflow-hidden rounded-xl border shadow-sm sm:self-auto",
                 "ring-offset-background focus-within:ring-ring focus-within:ring-2 focus-within:ring-offset-2",
               )}
             >
@@ -93,7 +93,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="size-11 shrink-0 rounded-none rounded-l-xl"
+                className="size-11 shrink-0 touch-manipulation rounded-none rounded-l-xl"
                 disabled={resolvedToAdd <= 1 || canAddMore <= 0 || isBusy}
                 aria-label={t("CART_DECREASE_ADD")}
                 onClick={() => bumpToAdd(-1)}
@@ -101,7 +101,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
                 <Minus className="size-4" aria-hidden />
               </Button>
               <span
-                className="flex min-w-[2.75rem] items-center justify-center text-base font-semibold tabular-nums"
+                className="flex min-w-12 items-center justify-center px-1 text-base font-semibold tabular-nums sm:min-w-[2.75rem] sm:px-0"
                 aria-live="polite"
               >
                 {resolvedToAdd}
@@ -110,7 +110,7 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="size-11 shrink-0 rounded-none rounded-r-xl"
+                className="size-11 shrink-0 touch-manipulation rounded-none rounded-r-xl"
                 disabled={
                   resolvedToAdd >= canAddMore || canAddMore <= 0 || isBusy
                 }
