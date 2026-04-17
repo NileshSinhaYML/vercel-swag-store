@@ -1,4 +1,4 @@
-import { fetchPromoCode } from "@/components/Navigation/navigation.actions";
+import { fetchPromoCode } from "@/components/Navigation/Navigation.actions";
 import { PromoBanner } from "@/components/Navigation/PromoBanner";
 import type { FC } from "react";
 

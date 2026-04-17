@@ -4,17 +4,17 @@ Monorepo for the Swag Store web app: a Next.js storefront that talks to a Swag S
 
 ## Structure
 
-| Path | Description |
-|------|-------------|
-| `apps/web` | Next.js 16 app (App Router, React 19, next-intl, Tailwind v4). Port **3001** in dev. |
-| `packages/ui` | Shared UI (shadcn-style components, Tailwind). Builds `dist/` CSS and TypeScript declarations consumed by the app. |
-| `packages/eslint-config` | Shared ESLint flat configs. |
-| `packages/typescript-config` | Shared `tsconfig` bases. |
-| `packages/tailwind-config` | Shared Tailwind/PostCSS pieces. |
+| Path                         | Description                                                                                                        |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `apps/web`                   | Next.js 16 app (App Router, React 19, next-intl, Tailwind v4). Port **3001** in dev.                               |
+| `packages/ui`                | Shared UI (shadcn-style components, Tailwind). Builds `dist/` CSS and TypeScript declarations consumed by the app. |
+| `packages/eslint-config`     | Shared ESLint flat configs.                                                                                        |
+| `packages/typescript-config` | Shared `tsconfig` bases.                                                                                           |
+| `packages/tailwind-config`   | Shared Tailwind/PostCSS pieces.                                                                                    |
 
 ## Requirements
 
-- **Node.js** 22.x (see root and `apps/web` `package.json` `engines`; Vercel uses this instead of the platform default)
+- **Node.js** 24.x (see root and `apps/web` `package.json` `engines`; Vercel uses this instead of the platform default)
 - **pnpm** 10.x (see `packageManager` in root `package.json`)
 
 ## Setup
@@ -36,13 +36,13 @@ Server code uses `@/server/swag-store-api.fetch` (`swagStoreApiUrl`, `swagStoreA
 
 ## Scripts (root)
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Run all `dev` tasks (web dev server, etc.) via Turborepo. |
-| `pnpm build` | Build dependencies (`^build`) then apps (`@repo/ui` then `web`). |
-| `pnpm lint` | ESLint in workspaces that define a `lint` script. |
-| `pnpm check-types` | Typecheck in workspaces that define `check-types`. |
-| `pnpm format` | Prettier on `*.{ts,tsx,md}`. |
+| Command            | Description                                                      |
+| ------------------ | ---------------------------------------------------------------- |
+| `pnpm dev`         | Run all `dev` tasks (web dev server, etc.) via Turborepo.        |
+| `pnpm build`       | Build dependencies (`^build`) then apps (`@repo/ui` then `web`). |
+| `pnpm lint`        | ESLint in workspaces that define a `lint` script.                |
+| `pnpm check-types` | Typecheck in workspaces that define `check-types`.               |
+| `pnpm format`      | Prettier on `*.{ts,tsx,md}`.                                     |
 
 ## Turborepo
 
