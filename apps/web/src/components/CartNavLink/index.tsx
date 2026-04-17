@@ -3,13 +3,20 @@
 import { APP_CONSTANTS } from "@/constants/app.constants";
 import { Link } from "@/i18n/navigation";
 import { selectCartTotalItems, useCartStore } from "@/stores/cart.store";
+import type { CartStore } from "@/stores/cart.store";
 import { Button } from "@ui/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { PAGE_ROUTES } from "@/constants/page.routes";
+import { useShallow } from "zustand/react/shallow";
+
 export const CartNavLink = () => {
   const t = useTranslations(APP_CONSTANTS.NAME_SPACES.NAVIGATION);
-  const totalItems = useCartStore(selectCartTotalItems);
+  const { totalItems } = useCartStore(
+    useShallow((state: CartStore) => ({
+      totalItems: selectCartTotalItems(state),
+    })),
+  );
   const isCartEmpty = totalItems === 0;
 
   return (

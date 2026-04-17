@@ -11,9 +11,11 @@ import {
 import type { CommitSearchToUrl } from "@/contexts/SearchPageContext";
 import { APP_CONSTANTS } from "@/constants/app.constants";
 import { useSearchResultsStore } from "@/stores/search-results.store";
+import type { SearchResultsState } from "@/types/components/search.types";
 import { getPaginationPageItems } from "@/utils/pagination.utils";
 import { useTranslations } from "next-intl";
 import type { FC } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 type ProductsPaginationProps = {
   commitToUrl: CommitSearchToUrl;
@@ -23,8 +25,10 @@ export const ProductsPagination: FC<Readonly<ProductsPaginationProps>> = ({
   commitToUrl,
 }) => {
   const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
-  const pagination = useSearchResultsStore(
-    (s) => s.searchResults?.meta?.pagination,
+  const { pagination } = useSearchResultsStore(
+    useShallow((state: SearchResultsState) => ({
+      pagination: state.searchResults?.meta?.pagination,
+    })),
   );
 
   if (!pagination) return null;

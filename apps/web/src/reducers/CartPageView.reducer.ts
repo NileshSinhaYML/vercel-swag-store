@@ -5,7 +5,7 @@ import type {
 import type { Reducer } from "react";
 
 export const initialCartPageViewState: CartPageViewState = {
-  hydrated: false,
+  isHydrated: false,
   pendingId: null,
   stockBySlug: {},
 };
@@ -15,8 +15,8 @@ export const cartPageViewReducer: Reducer<
   CartPageViewAction
 > = (state, action) => {
   switch (action.type) {
-    case "hydrated":
-      return { ...state, hydrated: true };
+    case "setIsHydrated":
+      return { ...state, isHydrated: true };
     case "pendingId":
       return { ...state, pendingId: action.pendingId };
     case "stockForSlug":

@@ -10,22 +10,30 @@ import {
   sortedUniqueCartProductSlugs,
 } from "@/utils/cart.utils";
 import { rehydrateCartStore, useCartStore } from "@/stores/cart.store";
+import type { CartStore } from "@/stores/cart.store";
 import type { ProductStockResponse } from "@/types/api/product-details";
 import { useCallback, useEffect, useMemo, useReducer } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 export const useCartPageViewModel = () => {
-  const cart = useCartStore((s) => s.cart);
-  const isBusy = useCartStore((s) => s.isBusy);
-  const error = useCartStore((s) => s.error);
-  const setQuantity = useCartStore((s) => s.setQuantity);
-  const removeLine = useCartStore((s) => s.removeLine);
-  const [{ hydrated, pendingId, stockBySlug }, dispatch] = useReducer(
+  const { cart, error, isBusy, removeLine, setQuantity } = useCartStore(
+    useShallow((state: CartStore) => ({
+      cart: state.cart,
+      error: state.error,
+      isBusy: state.isBusy,
+      removeLine: state.removeLine,
+      setQuantity: state.setQuantity,
+    })),
+  );
+  const [{ isHydrated, pendingId, stockBySlug }, dispatch] = useReducer(
     cartPageViewReducer,
     initialCartPageViewState,
   );
 
   useEffect(() => {
-    void rehydrateCartStore().finally(() => dispatch({ type: "hydrated" }));
+    void rehydrateCartStore().finally(() =>
+      dispatch({ type: "setIsHydrated" }),
+    );
   }, []);
 
   const run = useCallback(
@@ -48,7 +56,7 @@ export const useCartPageViewModel = () => {
   );
 
   useEffect(() => {
-    if (!hydrated || uniqueSlugs.length === 0) return;
+    if (!isHydrated || uniqueSlugs.length === 0) return;
     let cancelled = false;
     void Promise.all(
       uniqueSlugs.map(async (slug) => {
@@ -56,9 +64,9 @@ export const useCartPageViewModel = () => {
           const res = await fetch(getCartPageProductStockUrl(slug), {
             cache: "no-store",
           });
-          const json = (await res.json()) as ProductStockResponse;
+          const stockResponse = (await res.json()) as ProductStockResponse;
           if (cancelled) return;
-          const stock = productStockFromStockApiResponse(res, json);
+          const stock = productStockFromStockApiResponse(res, stockResponse);
           dispatch({
             type: "stockForSlug",
             slug,
@@ -74,12 +82,12 @@ export const useCartPageViewModel = () => {
     return () => {
       cancelled = true;
     };
-  }, [hydrated, uniqueSlugs]);
+  }, [isHydrated, uniqueSlugs]);
 
   return {
     cart,
     error,
-    hydrated,
+    isHydrated,
     isBusy,
     items: cart?.items ?? [],
     pendingId,

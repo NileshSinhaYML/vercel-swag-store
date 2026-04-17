@@ -15,7 +15,7 @@ export const CartPageView: FC = () => {
   const {
     cart,
     error,
-    hydrated,
+    isHydrated,
     isBusy,
     items,
     pendingId,
@@ -28,7 +28,7 @@ export const CartPageView: FC = () => {
   const currency = cart?.currency ?? "USD";
   const { estimatedTax, orderTotal } = getCartOrderTotals(cart);
 
-  if (!hydrated) {
+  if (!isHydrated) {
     return <CartPageLoader />;
   }
 

@@ -11,10 +11,11 @@ export const getCartPageProductStockUrl = (slug: string): string =>
 
 export const productStockFromStockApiResponse = (
   res: Response,
-  json: ProductStockResponse,
+  productStockResponse: ProductStockResponse,
 ): ProductStock | null => {
-  if (!res.ok || !json.success || !json.data) return null;
-  return json.data;
+  if (!res.ok || !productStockResponse.success || !productStockResponse.data)
+    return null;
+  return productStockResponse.data;
 };
 
 export const sortedUniqueCartProductSlugs = (

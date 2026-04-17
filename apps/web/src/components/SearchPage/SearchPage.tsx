@@ -9,7 +9,10 @@ import {
   mergeSearchCommitPartial,
   parseSearchParamsToQueryParams,
 } from "@/utils/search.utils";
-import type { SearchQueryParams } from "@/types/components/search.types";
+import type {
+  SearchQueryParams,
+  SearchResultsState,
+} from "@/types/components/search.types";
 import type { Category } from "@/types/api/categories";
 import { Button } from "@ui/components/ui/button";
 import { Input } from "@ui/components/ui/input";
@@ -30,7 +33,7 @@ import { SearchPageProvider } from "@/providers/SearchPageProvider";
 import type { CommitSearchToUrl } from "@/contexts/SearchPageContext";
 import { APP_CONSTANTS } from "@/constants/app.constants";
 import { useTranslations } from "next-intl";
-import { useShallow } from "zustand/shallow";
+import { useShallow } from "zustand/react/shallow";
 
 export interface SearchPageProps {
   readonly categories: Category[];
@@ -45,10 +48,10 @@ export const SearchPage: FC<Readonly<SearchPageProps>> = ({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { setQueryParams, queryParams } = useSearchResultsStore(
-    useShallow((s) => ({
-      setQueryParams: s.setQueryParams,
-      queryParams: s.queryParams,
+  const { queryParams, setQueryParams } = useSearchResultsStore(
+    useShallow((state: SearchResultsState) => ({
+      queryParams: state.queryParams,
+      setQueryParams: state.setQueryParams,
     })),
   );
   const prevUrlSyncKey = useRef<string | null>(null);

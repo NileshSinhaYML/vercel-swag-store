@@ -3,12 +3,14 @@
 import { APP_CONSTANTS } from "@/constants/app.constants";
 import { Link } from "@/i18n/navigation";
 import { getLineQuantity, useCartStore } from "@/stores/cart.store";
+import type { CartStore } from "@/stores/cart.store";
 import { Button } from "@ui/components/ui/button";
 import { cn } from "@repo/ui/lib/utils";
 import { ArrowRight, Minus, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FC } from "react";
+import { useShallow } from "zustand/react/shallow";
 import { PAGE_ROUTES } from "@/constants/page.routes";
 
 export interface ProductAddToCartProps {
@@ -23,10 +25,19 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
   isOutOfStock,
 }) => {
   const t = useTranslations(APP_CONSTANTS.NAME_SPACES.PDP);
-  const cart = useCartStore((s) => s.cart);
-  const isBusy = useCartStore((s) => s.isBusy);
-  const cartError = useCartStore((s) => s.error);
-  const addProduct = useCartStore((s) => s.addProduct);
+  const {
+    addProduct,
+    cart,
+    error: cartError,
+    isBusy,
+  } = useCartStore(
+    useShallow((state: CartStore) => ({
+      addProduct: state.addProduct,
+      cart: state.cart,
+      error: state.error,
+      isBusy: state.isBusy,
+    })),
+  );
   const maxStock = isOutOfStock ? 0 : Math.max(0, stock);
   const inCart = getLineQuantity(cart, productId);
   const canAddMore = Math.max(0, maxStock - inCart);
@@ -44,9 +55,12 @@ export const ProductAddToCart: FC<Readonly<ProductAddToCartProps>> = ({
   const bumpToAdd = useCallback(
     (delta: number) => {
       if (canAddMore <= 0) return;
-      setToAdd((q) => {
-        const next = Math.min(Math.max(1, q + delta), canAddMore);
-        return next;
+      setToAdd((quantity) => {
+        const updatedQuantity = Math.min(
+          Math.max(1, quantity + delta),
+          canAddMore,
+        );
+        return updatedQuantity;
       });
     },
     [canAddMore],

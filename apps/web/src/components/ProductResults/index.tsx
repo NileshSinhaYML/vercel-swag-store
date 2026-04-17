@@ -2,6 +2,7 @@
 
 import { ProductCard } from "@/components/ProductCard";
 import { useSearchResultsStore } from "@/stores/search-results.store";
+import type { SearchResultsState } from "@/types/components/search.types";
 import {
   buildSearchApiQueryString,
   hasActiveSearchQuery,
@@ -21,13 +22,14 @@ import { useTranslations } from "next-intl";
 export const ProductResults = () => {
   const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
   const commitToUrl = useSearchPageContext();
-  const { queryParams, setSearchResults } = useSearchResultsStore(
-    useShallow((s) => ({
-      queryParams: s.queryParams,
-      setSearchResults: s.setSearchResults,
-    })),
-  );
-  const searchResults = useSearchResultsStore((s) => s.searchResults);
+  const { queryParams, searchResults, setSearchResults } =
+    useSearchResultsStore(
+      useShallow((state: SearchResultsState) => ({
+        queryParams: state.queryParams,
+        searchResults: state.searchResults,
+        setSearchResults: state.setSearchResults,
+      })),
+    );
 
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);

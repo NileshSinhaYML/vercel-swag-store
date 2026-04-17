@@ -1,12 +1,12 @@
 import type { ProductStock } from "@/types/api/product-details";
 
 export type CartPageViewState = {
-  hydrated: boolean;
+  isHydrated: boolean;
   pendingId: string | null;
   stockBySlug: Record<string, ProductStock | null>;
 };
 
 export type CartPageViewAction =
-  | { type: "hydrated" }
+  | { type: "setIsHydrated" }
   | { type: "pendingId"; pendingId: string | null }
   | { type: "stockForSlug"; slug: string; stock: ProductStock | null };
