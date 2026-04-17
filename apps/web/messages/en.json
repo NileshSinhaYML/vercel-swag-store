@@ -12,6 +12,7 @@
   },
   "SITE_METADATA": {
     "TITLE": "Swag Store - Your One-Stop Shop for Cool Swag",
+    "SITE_NAME": "Swag Store",
     "META_TITLE": "Swag Store | %s",
     "DEFAULT_META_TITLE": "Swag Store - Your One-Stop Shop for Cool Swag",
     "DESCRIPTION": "Discover the coolest swag at our online store. From trendy apparel to unique accessories, we have everything you need to express your style. Shop now and elevate your swag game!"
@@ -40,6 +41,7 @@
   },
   "CART": {
     "META_TITLE": "Cart",
+    "META_DESCRIPTION": "Review the items in your shopping cart, update quantities, and see your order total before checkout.",
     "TITLE": "Your cart",
     "LOADING": "Loading cart…",
     "EMPTY": "Your cart is empty.",
@@ -54,6 +56,8 @@
     "INCREASE_QTY": "Increase quantity"
   },
   "SEARCH_PAGE": {
+    "META_TITLE": "Search products",
+    "META_DESCRIPTION": "Browse and search the Swag Store catalog. Filter by category, find apparel and accessories, and discover developer swag.",
     "SEARCH_LABEL": "Search",
     "SEARCH_PLACEHOLDER": "Search products…",
     "SEARCH_BUTTON": "Search",

@@ -204,22 +204,21 @@ export const useCartStore = create<CartStore>()(
   ),
 );
 
-export async function rehydrateCartStore(): Promise<void> {
+export const rehydrateCartStore = async (): Promise<void> => {
   await useCartStore.persist.rehydrate();
   const { token } = useCartStore.getState();
   if (token) {
     await useCartStore.getState().refreshCart();
   }
-}
+};
 
-export function getLineQuantity(
+export const getLineQuantity = (
   cart: CartPayload | null,
   productId: string,
-): number {
+): number => {
   const line = cart?.items.find((i) => i.productId === productId);
   return line?.quantity ?? 0;
-}
+};
 
-export function selectCartTotalItems(state: CartStore): number {
-  return state.cart?.totalItems ?? 0;
-}
+export const selectCartTotalItems = (state: CartStore): number =>
+  state.cart?.totalItems ?? 0;

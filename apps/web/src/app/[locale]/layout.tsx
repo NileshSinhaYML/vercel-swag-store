@@ -7,17 +7,27 @@ import "@ui/styles/global.css";
 import { routing } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { LocaleLayoutContent } from "@/layouts/LocaleLayoutContent";
+import { getSiteOrigin } from "@/server/site-origin";
 
-export async function generateMetadata(): Promise<Metadata> {
+export const generateMetadata = async (): Promise<Metadata> => {
   const t = await getTranslations("SITE_METADATA");
+  const defaultTitle = t("DEFAULT_META_TITLE");
+  const description = t("DESCRIPTION");
   return {
+    metadataBase: getSiteOrigin(),
     title: {
       template: t("META_TITLE"),
-      default: t("DEFAULT_META_TITLE"),
+      default: defaultTitle,
     },
-    description: t("DESCRIPTION"),
+    description,
+    openGraph: {
+      type: "website",
+      siteName: t("SITE_NAME"),
+      title: defaultTitle,
+      description,
+    },
   };
-}
+};
 
 export interface LocaleLayoutProps {
   children: ReactNode;
