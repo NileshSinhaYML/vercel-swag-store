@@ -29,7 +29,7 @@ pnpm install
 
 Copy `apps/web/.env.example` to `apps/web/.env` and set:
 
-- `SWAG_STORE_API_ENDPOINT` — base URL of the Swag Store API (no trailing slash)
+- `SWAG_STORE_API_ENDPOINT` — base URL of the Swag Store API
 - `SWAG_STORE_API_TOKEN` — value sent as `x-vercel-protection-bypass` for upstream requests
 
 Server code uses `@/server/swag-store-api.fetch` (`swagStoreApiUrl`, `swagStoreApiAuthHeaders`) for those calls.
@@ -58,7 +58,3 @@ Workspace overrides (narrow the build graph for this repo):
 - [`apps/web/turbo.json`](apps/web/turbo.json) — `build` depends only on `@repo/ui#build` (not every devDependency).
 
 `@repo/ui` exposes a composite **`build`** script (`build:styles` + `build:components`) so UI assets exist before `next build`.
-
-## License
-
-Private / internal unless otherwise noted per package.
