@@ -45,6 +45,9 @@
     "TITLE": "Your cart",
     "LOADING": "Loading cart…",
     "EMPTY": "Your cart is empty.",
+    "EMPTY_HEADLINE": "Plenty of room in here",
+    "EMPTY_LEAD": "Hoodies, tees, the bits that end up on your desk—add something you’ll be glad you shipped. We’ll still be here when you get back.",
+    "EMPTY_CTA_BROWSE": "Browse all products",
     "NO_IMAGE": "No image",
     "SUBTOTAL": "Subtotal",
     "ESTIMATED_TAX": "Estimated tax",
@@ -53,7 +56,8 @@
     "ORDER_SUMMARY": "Order summary",
     "REMOVE": "Remove",
     "DECREASE_QTY": "Decrease quantity",
-    "INCREASE_QTY": "Increase quantity"
+    "INCREASE_QTY": "Increase quantity",
+    "CONTINUE_SHOPPING": "Continue shopping"
   },
   "SEARCH_PAGE": {
     "META_TITLE": "Search products",

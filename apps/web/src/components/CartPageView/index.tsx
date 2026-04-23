@@ -5,6 +5,7 @@ import { CartLineRow } from "@/components/CartPageView/CartLineRow";
 import { CartOrderSummary } from "@/components/CartPageView/CartOrderSummary";
 import { CartPageHeader } from "@/components/CartPageView/CartPageHeader";
 import { CartPageLoader } from "@/components/CartPageView/CartPageLoader";
+import { CartPageEmptyCart } from "@/components/CartPageView/CartPageEmptyCart";
 import { getCartOrderTotals } from "@/utils/cart.utils";
 import { useCartPageViewModel } from "@/hooks/useCartPageViewModel";
 import { useTranslations } from "next-intl";
@@ -33,38 +34,42 @@ export const CartPageView: FC = () => {
   }
 
   return (
-    <div className="col-span-full flex flex-col gap-8">
-      <CartPageHeader title={t("TITLE")} error={error} />
-
+    <div className="col-span-full flex h-full min-h-0 flex-col gap-8">
       {items.length === 0 ? (
-        <p className="text-muted-foreground">{t("EMPTY")}</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="min-w-0 lg:col-span-7">
-            <ul className="flex flex-col gap-6">
-              {items.map((line) => (
-                <CartLineRow
-                  key={line.productId}
-                  line={line}
-                  currency={currency}
-                  stockEntry={stockBySlug[line.product.slug]}
-                  busyRow={isBusy && pendingId === line.productId}
-                  run={run}
-                  setQuantity={setQuantity}
-                  removeLine={removeLine}
-                />
-              ))}
-            </ul>
-          </div>
-
-          {cart ? (
-            <CartOrderSummary
-              cart={cart}
-              estimatedTax={estimatedTax}
-              orderTotal={orderTotal}
-            />
-          ) : null}
+        <div className="flex min-h-0 flex-1 flex-col justify-center">
+          <CartPageEmptyCart />
         </div>
+      ) : (
+        <>
+          <CartPageHeader title={t("TITLE")} error={error} />
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="min-w-0 lg:col-span-7">
+              <ul className="flex flex-col gap-6">
+                {items.map((line) => (
+                  <CartLineRow
+                    key={line.productId}
+                    line={line}
+                    currency={currency}
+                    stockEntry={stockBySlug[line.product.slug]}
+                    busyRow={isBusy && pendingId === line.productId}
+                    run={run}
+                    setQuantity={setQuantity}
+                    removeLine={removeLine}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            {cart ? (
+              <CartOrderSummary
+                cart={cart}
+                estimatedTax={estimatedTax}
+                orderTotal={orderTotal}
+              />
+            ) : null}
+          </div>
+        </>
       )}
     </div>
   );
