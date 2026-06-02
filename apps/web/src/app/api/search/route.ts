@@ -1,28 +1,30 @@
-import { API_ROUTES } from "@/constants/api.routes";
-import {
-  swagStoreApiAuthHeaders,
-  swagStoreApiUrl,
-} from "@/server/swag-store-api.fetch";
-import type { ProductsResponse } from "@/types/api/products";
+import { fetchSearchProducts } from "@/app/[locale]/search/actions";
 import { isNextPrerenderBailout } from "@/utils/api.utils";
+import type { SearchQueryParams } from "@/types/components/search.types";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   try {
     const { searchParams } = new URL(request.url);
-    const upstream = new URLSearchParams();
-    for (const [key, value] of searchParams.entries()) {
-      upstream.append(key, value);
+    const pageParam = Number.parseInt(searchParams.get("page") ?? "1", 10);
+    const limitParam = Number.parseInt(searchParams.get("limit") ?? "12", 10);
+    const queryParams: SearchQueryParams = {
+      search: (searchParams.get("search") ?? "").trim(),
+      category: (searchParams.get("category") ?? "").trim(),
+      page: Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1,
+      limit:
+        Number.isFinite(limitParam) && limitParam > 0
+          ? Math.min(100, limitParam)
+          : 12,
+    };
+    const products = await fetchSearchProducts(queryParams);
+    if (!products) {
+      return NextResponse.json(
+        { success: false, error: "Failed to fetch products" },
+        { status: 502 },
+      );
     }
-
-    const productsResponse = await fetch(
-      swagStoreApiUrl(`${API_ROUTES.PRODUCTS}?${upstream.toString()}`),
-      { headers: { ...swagStoreApiAuthHeaders } },
-    );
-
-    const products =
-      (await productsResponse.json()) as Awaited<ProductsResponse>;
     return NextResponse.json(products);
   } catch (error) {
     if (isNextPrerenderBailout(error)) {
