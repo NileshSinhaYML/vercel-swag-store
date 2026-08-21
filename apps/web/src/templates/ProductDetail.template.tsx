@@ -16,7 +16,9 @@ export const ProductDetailTemplate: FC<ProductDetailTemplateProps> = async ({
   pid,
 }) => {
   const productDetailsResponse = await fetchProductDetails(pid);
-  if (!productDetailsResponse) notFound();
+  if (!productDetailsResponse?.success || !productDetailsResponse.data) {
+    notFound();
+  }
   const productStockResponse = await fetchProductStock(pid);
   const details = productDetailsResponse.data;
   const hasImage = details && details.images?.length > 0;

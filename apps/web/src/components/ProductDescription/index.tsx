@@ -36,7 +36,7 @@ export const ProductDescription: FC<ProductDescriptionProps> = async ({
     <div className={cn("flex flex-col gap-6", className)}>
       <div className="flex flex-col gap-4">
         {category ? (
-          <span className="text-muted-foreground w-fit rounded-full border border-border/80 bg-muted/40 px-3 py-1 text-[11px] font-medium capitalize tracking-widest">
+          <span className="border-border/80 bg-muted/40 text-muted-foreground w-fit rounded-full border px-3 py-1 text-[11px] font-medium tracking-widest capitalize">
             {category}
           </span>
         ) : null}
@@ -48,11 +48,11 @@ export const ProductDescription: FC<ProductDescriptionProps> = async ({
         </p>
       </div>
 
-      <div className="flex flex-col gap-3 border-t border-border/80 pt-6">
+      <div className="border-border/80 flex flex-col gap-3 border-t pt-6">
         <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
           {t("PRICE_LABEL")}
         </span>
-        <p className="text-3xl font-semibold tabular-nums tracking-tight lg:text-4xl">
+        <p className="text-3xl font-semibold tracking-tight tabular-nums lg:text-4xl">
           {formatter.number(price, {
             style: "currency",
             currency,

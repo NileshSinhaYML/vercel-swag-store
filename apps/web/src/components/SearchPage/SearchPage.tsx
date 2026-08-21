@@ -14,6 +14,7 @@ import type {
   SearchResultsState,
 } from "@/types/components/search.types";
 import type { Category } from "@/types/api/categories";
+import type { ProductsResponse } from "@/types/api/products";
 import { Button } from "@ui/components/ui/button";
 import { Input } from "@ui/components/ui/input";
 import { Label } from "@ui/components/ui/label";
@@ -38,11 +39,13 @@ import { useShallow } from "zustand/react/shallow";
 export interface SearchPageProps {
   readonly categories: Category[];
   readonly initialQueryParams: SearchQueryParams;
+  readonly initialProducts: ProductsResponse | null;
 }
 
 export const SearchPage: FC<Readonly<SearchPageProps>> = ({
   categories,
   initialQueryParams,
+  initialProducts,
 }) => {
   const t = useTranslations(APP_CONSTANTS.NAME_SPACES.SEARCH_PAGE);
   const router = useRouter();
@@ -163,7 +166,10 @@ export const SearchPage: FC<Readonly<SearchPageProps>> = ({
         </div>
 
         {urlReady ? (
-          <ProductResults />
+          <ProductResults
+            initialProducts={initialProducts}
+            initialQueryParams={initialQueryParams}
+          />
         ) : (
           <div className="border-border flex min-h-[12rem] items-center justify-center rounded-lg border border-dashed">
             <p className="text-muted-foreground text-sm">

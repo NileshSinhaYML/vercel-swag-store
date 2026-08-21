@@ -9,7 +9,10 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { FC } from "react";
 import { Suspense } from "react";
-import { fetchAllCategories } from "@/app/[locale]/search/actions";
+import {
+  fetchAllCategories,
+  fetchSearchProducts,
+} from "@/app/[locale]/search/actions";
 
 export interface SearchPageProps {
   params: Promise<{ locale: string }>;
@@ -43,12 +46,14 @@ const SearchPage: FC<SearchPageProps> = async (props) => {
     resolvedSearchParams as AppSearchParamsRecord,
     categories,
   );
+  const initialProducts = await fetchSearchProducts(initialQueryParams);
   return (
     <Suspense fallback={<SearchPageFallback />}>
       <Main>
         <SearchPageTemplate
           categories={categories}
           initialQueryParams={initialQueryParams}
+          initialProducts={initialProducts}
         />
       </Main>
     </Suspense>

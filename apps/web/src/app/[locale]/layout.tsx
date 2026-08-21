@@ -37,14 +37,17 @@ export interface LocaleLayoutProps {
 export const generateStaticParams = () =>
   routing.locales.map((locale) => ({ locale }));
 
-const LocaleLayout: FC<Readonly<LocaleLayoutProps>> = (props) => (
-  <html lang={routing.defaultLocale}>
-    <body className={geist.className}>
-      <Suspense fallback={null}>
-        <LocaleLayoutContent {...props} />
-      </Suspense>
-    </body>
-  </html>
-);
+const LocaleLayout: FC<Readonly<LocaleLayoutProps>> = async (props) => {
+  const { locale } = await props.params;
+  return (
+    <html lang={locale}>
+      <body className={geist.className}>
+        <Suspense fallback={null}>
+          <LocaleLayoutContent {...props} />
+        </Suspense>
+      </body>
+    </html>
+  );
+};
 
 export default LocaleLayout;
